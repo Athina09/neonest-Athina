@@ -6,7 +6,9 @@ import { Button } from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import Badge from "../components/ui/Badge";
 import Babyessentials from "../components/Babyessentials"; 
-import { Plus, Package, AlertTriangle, Edit, Trash2, Bell, Save, ShoppingCart, ChevronDown, ChevronUp } from "lucide-react"; 
+import { Plus, Package, AlertTriangle, Edit, Trash2, Bell, Save, ShoppingCart, ChevronDown, ChevronUp } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import LoginPrompt from "../components/LoginPrompt"; 
 
 const itemCategories = [
   { id: "diapering", name: "Diapers & Wipes", icon: "🍼" }, 
@@ -23,6 +25,7 @@ const itemCategories = [
 ];
 
 export default function Page() {
+  const { isAuth } = useAuth();
   const [inventory, setInventory] = useState([]);
   const [isAddingItem, setIsAddingItem] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
@@ -252,7 +255,12 @@ export default function Page() {
     );
   }
 
-return (
+  // Show login prompt if user is not authenticated
+  if (!isAuth) {
+    return <LoginPrompt sectionName="essentials tracker" />;
+  }
+
+  return (
     <div className="space-y-6 px-4 sm:px-6 md:px-8 py-6 max-w-7xl mx-auto">
       {/* Header and Add Item Button */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
