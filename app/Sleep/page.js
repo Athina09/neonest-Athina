@@ -36,18 +36,20 @@ export default function Page() {
 
   useEffect(() => {
     document.title = "Sleep | NeoNest";
-    const fetchLogs = async () => {
-      try {
-        const res = await axios.get("/api/sleep", { headers });
-        setSchedules(res.data);
-      } catch (err) {
-        console.error("Failed to fetch logs:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchLogs();
-  }, []);
+    if (isAuth) {
+      const fetchLogs = async () => {
+        try {
+          const res = await axios.get("/api/sleep", { headers });
+          setSchedules(res.data);
+        } catch (err) {
+          console.error("Failed to fetch logs:", err);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchLogs();
+    }
+  }, [isAuth]);
 
   const addSchedule = async () => {
     if (!newSchedule.time || !newSchedule.duration) return;

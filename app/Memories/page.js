@@ -52,8 +52,10 @@ export default function MemoriesCommunityBlog() {
 
   useEffect(() => {
     document.title = "Memories, Community & Blogs | NeoNest";
-    fetchMemories();
-  }, [token]);
+    if (isAuth && token) {
+      fetchMemories();
+    }
+  }, [isAuth, token]);
 
   const fetchMemories = async () => {
     try {

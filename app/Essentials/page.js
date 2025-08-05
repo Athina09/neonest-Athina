@@ -74,8 +74,10 @@ export default function Page() {
 
   useEffect(() => {
     document.title = "Essentials | NeoNest";
-    fetchInventory();
-  }, []);
+    if (isAuth) {
+      fetchInventory();
+    }
+  }, [isAuth]);
 
   // Add new item
   const addItem = async () => {
