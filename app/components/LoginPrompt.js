@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 export default function LoginPrompt({ sectionName = "this section" }) {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   // Prevent hydration mismatch and ensure smooth mounting
@@ -16,12 +16,12 @@ export default function LoginPrompt({ sectionName = "this section" }) {
   }, []);
 
   const handleLoginClick = () => {
-    setIsLoading(true);
+    setIsNavigating(true);
     router.push('/Login');
   };
 
   const handleSignupClick = () => {
-    setIsLoading(true);
+    setIsNavigating(true);
     router.push('/Signup');
   };
 
@@ -75,14 +75,14 @@ export default function LoginPrompt({ sectionName = "this section" }) {
           <div className="space-y-3">
             <Button
               onClick={handleLoginClick}
-              disabled={isLoading}
+              disabled={isNavigating}
               className={`w-full py-3 rounded-xl font-semibold shadow-md transition-all duration-300 transform ${
-                isLoading 
+                isNavigating 
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
                   : "bg-gradient-to-r from-pink-400 to-purple-500 hover:from-pink-500 hover:to-purple-600 text-white hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg hover:shadow-pink-200"
               }`}
             >
-              {isLoading ? (
+              {isNavigating ? (
                 <div className="flex items-center justify-center gap-2">
                   <Loader2 className="w-4 h-4 animate-spin" />
                   <span>Loading...</span>
@@ -96,9 +96,9 @@ export default function LoginPrompt({ sectionName = "this section" }) {
               Don't have an account?{" "}
               <button
                 onClick={handleSignupClick}
-                disabled={isLoading}
+                disabled={isNavigating}
                 className={`text-pink-600 hover:text-pink-700 font-medium transition-colors duration-300 hover:underline ${
-                  isLoading ? "opacity-50 cursor-not-allowed" : ""
+                  isNavigating ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
                 Sign up here

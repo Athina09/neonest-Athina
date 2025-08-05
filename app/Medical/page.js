@@ -72,8 +72,8 @@ export default function VaccineTracker({ babyId }) {
   useEffect(() => {
     document.title = "Medical | NeoNest"
     if (isAuth) {
-      fetchVaccines()
-      // fetchBabyBirthDate() 
+    fetchVaccines()
+    // fetchBabyBirthDate() 
     }
   }, [isAuth])
 
